@@ -1,0 +1,39 @@
+jenkins:
+  systemMessage: "Jenkins LTS with JCasC + DSL (immutable)"
+  numExecutors: 2
+  mode: NORMAL
+  agentProtocols:
+    - "JNLP4-connect"
+  crumbIssuer: "standard"
+  remotingSecurity:
+    enabled: true
+
+unclassified:
+  location:
+    url: "http://localhost:8080/"
+  timestamper:
+    allPipelines: true
+
+tool:
+  git:
+    installations:
+      - name: "git"
+        home: "/usr/bin/git"
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - "com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl":
+              id: "aws-adhoc-ip"
+              description: "Use EC2 instance profile; assume JenkinS3Role"
+              accessKey: ""
+              secretKey: ""
+              iamRoleArn: "arn:aws:iam::732583169994:role/JenkinS3Role"
+          - basicSSHUserPrivateKey:
+              id: "github-ssh"
+              description: "GitHub SSH"
+              username: "git"
+              privateKeySource:
+                directEntry:
+                  privateKey: "${readFile:/var/lib/jenkins/.ssh/github}"

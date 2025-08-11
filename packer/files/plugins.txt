@@ -1,0 +1,13 @@
+configuration-as-code
+job-dsl
+workflow-aggregator
+pipeline-model-definition
+git
+ssh-credentials
+credentials
+credentials-binding
+aws-credentials
+# Uncomment if you want withAWS {} step:
+# pipeline-aws
+timestamper
+authorize-project
